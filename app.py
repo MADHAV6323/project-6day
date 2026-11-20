@@ -1,12 +1,7 @@
-
 import streamlit as st
 from groq import Groq
 from urllib.parse import quote_plus
 import os
-
-# ---------------------------------
-# PAGE CONFIGURATION
-# ---------------------------------
 
 st.set_page_config(
     page_title="Karnataka AI Tourist Guide",
@@ -22,10 +17,6 @@ st.write(
     "historical locations, temples, waterfalls and hill stations."
 )
 
-# ---------------------------------
-# GROQ API CONFIGURATION
-# ---------------------------------
-
 api_key = os.getenv("GROQ_API_KEY")
 
 try:
@@ -33,10 +24,6 @@ try:
         api_key = st.secrets["GROQ_API_KEY"]
 except Exception:
     pass
-
-# ---------------------------------
-# KARNATAKA PLACES DATABASE
-# ---------------------------------
 
 places = {
     "Bagalkote": [
@@ -233,10 +220,6 @@ places = {
     ]
 }
 
-# ---------------------------------
-# GOOGLE MAPS LINK GENERATOR
-# ---------------------------------
-
 def google_maps_link(place):
 
     query = quote_plus(place + ", Karnataka, India")
@@ -245,10 +228,6 @@ def google_maps_link(place):
         "https://www.google.com/maps/search/?api=1&query="
         + query
     )
-
-# ---------------------------------
-# AI FUNCTION
-# ---------------------------------
 
 def ask_ai(question):
 
@@ -301,15 +280,6 @@ selected_district = st.sidebar.selectbox(
     ["All Districts"] + list(places.keys())
 )
 
-# ---------------------------------
-# DISPLAY PLACES
-# ---------------------------------
-
-
-# ---------------------------------
-# DISPLAY PLACES
-# ---------------------------------
-
 st.header("🏞️ Explore Tourist Places")
 
 if selected_district == "All Districts":
@@ -339,11 +309,6 @@ else:
             f"📍 **{place}** "
             f"[Open Google Maps]({link})"
         )
-
-
-# ---------------------------------
-# AI CHAT SECTION
-# ---------------------------------
 
 st.divider()
 
@@ -388,10 +353,6 @@ if st.button("Generate AI Answer"):
             except Exception as e:
 
                 st.error(f"Error: {e}")
-
-# ---------------------------------
-# FOOTER
-# ---------------------------------
 
 st.divider()
 
