@@ -1,7 +1,12 @@
+
 import streamlit as st
 from groq import Groq
 from urllib.parse import quote_plus
 import os
+
+# ---------------------------------
+# PAGE CONFIGURATION
+# ---------------------------------
 
 st.set_page_config(
     page_title="Karnataka AI Tourist Guide",
@@ -9,13 +14,17 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title(" Karnataka AI Tourist Guide")
+st.title("🌍 Karnataka AI Tourist Guide")
 st.subheader("Explore Karnataka with Artificial Intelligence")
 
 st.write(
     "Ask anything about Karnataka tourist places, "
     "historical locations, temples, waterfalls and hill stations."
 )
+
+# ---------------------------------
+# GROQ API CONFIGURATION
+# ---------------------------------
 
 api_key = os.getenv("GROQ_API_KEY")
 
@@ -25,6 +34,9 @@ try:
 except Exception:
     pass
 
+# ---------------------------------
+# KARNATAKA PLACES DATABASE
+# ---------------------------------
 
 places = {
     "Bagalkote": [
@@ -221,6 +233,10 @@ places = {
     ]
 }
 
+# ---------------------------------
+# GOOGLE MAPS LINK GENERATOR
+# ---------------------------------
+
 def google_maps_link(place):
 
     query = quote_plus(place + ", Karnataka, India")
@@ -229,6 +245,10 @@ def google_maps_link(place):
         "https://www.google.com/maps/search/?api=1&query="
         + query
     )
+
+# ---------------------------------
+# AI FUNCTION
+# ---------------------------------
 
 def ask_ai(question):
 
@@ -270,14 +290,27 @@ def ask_ai(question):
 
     return response.choices[0].message.content
 
+# ---------------------------------
+# SIDEBAR - DISTRICT SEARCH
+# ---------------------------------
+
 st.sidebar.title("📍 Explore Districts")
 
 selected_district = st.sidebar.selectbox(
     "Select Karnataka District",
     ["All Districts"] + list(places.keys())
-  
+)
 
-st.header(" Explore Tourist Places")
+# ---------------------------------
+# DISPLAY PLACES
+# ---------------------------------
+
+
+# ---------------------------------
+# DISPLAY PLACES
+# ---------------------------------
+
+st.header("🏞️ Explore Tourist Places")
 
 if selected_district == "All Districts":
 
@@ -308,9 +341,13 @@ else:
         )
 
 
+# ---------------------------------
+# AI CHAT SECTION
+# ---------------------------------
+
 st.divider()
 
-st.header(" Ask Karnataka AI")
+st.header("🤖 Ask Karnataka AI")
 
 question = st.text_area(
     "Enter your question:",
@@ -352,7 +389,9 @@ if st.button("Generate AI Answer"):
 
                 st.error(f"Error: {e}")
 
-
+# ---------------------------------
+# FOOTER
+# ---------------------------------
 
 st.divider()
 
@@ -362,5 +401,7 @@ st.caption(
 )
 
 st.caption(
-    "Explore Karnataka – One Place at a Time "
+    "Explore Karnataka – One Place at a Time ❤️"
 )
+
+
