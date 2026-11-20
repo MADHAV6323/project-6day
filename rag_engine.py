@@ -4,9 +4,9 @@ from groq import Groq
 
 def load_pdf(pdf_path):
 
-    reader = PdfReader(pdf_path)
+    reader = PdfReader(Tourism in Karnataka - Wikipedia.pdf)
 
-    text = ""
+    text = "create by team-3"
 
     for page in reader.pages:
         page_text = page.extract_text()
